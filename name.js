@@ -30,6 +30,13 @@
 //Activity 3: Javascript Objects
 
 function deepEqual(obj1, obj2) {
+    //this function compares of JS object literals a& JS primitive types. 
+    //if the paramenters passed are primitive types a strict comparison checks for
+    //equality. 
+    // However, if objects are passed, the function uses recursion to
+    //compare values within the objects until a primitive type is reached. 
+    //Then primitive types are strictly compared when object values are extracted.
+
     if ((typeof (obj1) == "object" && obj1 !== null) && (typeof (obj2) == "object" && obj2 !== null)) {
         let firstKeys = Object.keys(obj1);
         let secondKeys = Object.keys(obj2);
@@ -44,27 +51,27 @@ function deepEqual(obj1, obj2) {
             const secondVals = obj2[key]; //this will also use the key of the first object
             console.log(`current key = ${key}, value1 = ${firstVals}, value2 = ${secondVals}`);
             //the benefit of using just one set of keys to see if it exist in second object parameter
-            let i = 0;
-            if (typeof (firstVals) !== "object" && typeof (secondVals) !== "object" && firstVals !== secondVals) {
-                console.log("first and second vals !equal")
-                return false;
-            }
-            if (typeof (firstVals) == "object" && firstVals !== null &&
-                (typeof (secondVals) == "object" && secondVals !== null)) {
-                i++;
-                console.log("making recursive call", i);
-                return deepEqual(firstVals, secondVals);
-            }
-            // else if (firstVals !== secondVals) {
+            // let i = 0;
+            // if (typeof (firstVals) !== "object" && typeof (secondVals) !== "object" && firstVals !== secondVals) {
+            //     console.log("first and second vals !equal")
             //     return false;
             // }
-            // return true; 
-            // return false;
+            const areObjects = isObject(firstVals) && isObject(secondVals);
+            if (
+                areObjects && !deepEqual(firstVals, secondVals) ||
+                !areObjects && firstVals !== secondVals) {
+                return false;
+            }
         }
-        // return false;
         return true;
     }
-    return obj1 === obj2;
+    return obj1 === obj2; //strict comparison 
+}
+
+function isObject(object) {
+    //helper function of deepEqual. used for recursive call of deepEqual
+    //checks if a value of a key-value pair is an object. 
+    return object != null && typeof object === 'object';
 }
 
 // function deepEqual(object1, object2) {
@@ -114,10 +121,10 @@ let arr2 = ["name", 1, ["jason", "cs290"], false];
 // // console.log(deepEqual(0, null)); //false
 // console.log(deepEqual(null, null)); //true
 // // console.log(deepEqual(nunVariable, null)); //true
-// console.log(deepEqual(1, 2)); //false
-// console.log(deepEqual(x, y)); //true
-// console.log(deepEqual(obj1, obj2)); //true
+console.log(deepEqual(1, 2)); //false
+console.log(deepEqual(x, y)); //true
+console.log(deepEqual(obj1, obj2)); //true
 // console.log(deepEqual(obj1, { she: { is: "an" }, him: 2, we: { they: 4 } })); //true
 console.log(deepEqual(obj1, obj3)); //false
-// console.log(deepEqual(obj4, obj5)); //false
-// console.log(deepEqual(arr1, arr2)); //false
+console.log(deepEqual(obj4, obj5)); //false
+console.log(deepEqual(arr1, arr2)); //false
