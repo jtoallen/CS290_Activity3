@@ -30,9 +30,9 @@
 //Activity 3: Javascript Objects
 
 function deepEqual(obj1, obj2) {
-    //this function compares of JS object literals a& JS primitive types. 
-    //if the paramenters passed are primitive types a strict comparison checks for
-    //equality. 
+    //this function compares JS object literals a& JS primitive types. 
+    //if the parameters passed are primitive types a strict comparison checks for
+    //equality. first if statement is by-passed. 
     // However, if objects are passed, the function uses recursion to
     //compare values within the objects until a primitive type is reached. 
     //Then primitive types are strictly compared when object values are extracted.
@@ -48,7 +48,7 @@ function deepEqual(obj1, obj2) {
             //keep using key of the first object
             // to find same key in second object
             //because if key absent in second object then objects
-            //  cannot be equalivent
+            //  cannot be equivalent
             const firstVals = obj1[key];
             const secondVals = obj2[key];
             const stillObjects = isObject(firstVals) && isObject(secondVals);
