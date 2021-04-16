@@ -45,21 +45,16 @@ function deepEqual(obj1, obj2) {
             return false;
         }
         for (let key of firstKeys) {
-            // console.log("first keys are ", firstKeys);
-            // console.log("second keys are ", secondKeys);
-            const firstVals = obj1[key]; //this will use the key of the first object
-            const secondVals = obj2[key]; //this will also use the key of the first object
-            console.log(`current key = ${key}, value1 = ${firstVals}, value2 = ${secondVals}`);
-            //the benefit of using just one set of keys to see if it exist in second object parameter
-            // let i = 0;
-            // if (typeof (firstVals) !== "object" && typeof (secondVals) !== "object" && firstVals !== secondVals) {
-            //     console.log("first and second vals !equal")
-            //     return false;
-            // }
-            const areObjects = isObject(firstVals) && isObject(secondVals);
+            //keep using key of the first object
+            // to find same key in second object
+            //because if key absent in second object then objects
+            //  cannot be equalivent
+            const firstVals = obj1[key];
+            const secondVals = obj2[key];
+            const stillObjects = isObject(firstVals) && isObject(secondVals);
             if (
-                areObjects && !deepEqual(firstVals, secondVals) ||
-                !areObjects && firstVals !== secondVals) {
+                stillObjects && !deepEqual(firstVals, secondVals) ||
+                !stillObjects && firstVals !== secondVals) {
                 return false;
             }
         }
@@ -74,32 +69,6 @@ function isObject(object) {
     return object != null && typeof object === 'object';
 }
 
-// function deepEqual(object1, object2) {
-//     const keys1 = Object.keys(object1);
-//     const keys2 = Object.keys(object2);
-
-//     if (keys1.length !== keys2.length) {
-//         return false;
-//     }
-
-//     for (const key of keys1) {
-//         const val1 = object1[key];
-//         const val2 = object2[key];
-//         const areObjects = isObject(val1) && isObject(val2);
-//         if (
-//             areObjects && !deepEqual(val1, val2) ||
-//             !areObjects && val1 !== val2
-//         ) {
-//             return false;
-//         }
-//     }
-
-//     return true;
-// }
-
-// function isObject(object) {
-//     return object != null && typeof object === 'object';
-// }
 
 
 let obj1 = { she: { is: "an" }, him: 2, we: { they: 4 } };
@@ -115,16 +84,16 @@ let nunVariable = null;
 let arr1 = ["name", 1, ["jason", "cs290"], true];
 let arr2 = ["name", 1, ["jason", "cs290"], false];
 
-// console.log(deepEqual(obj1, obj3)); //false
-// console.log(deepEqual(null, null)); //true
-// console.log(deepEqual(nunVariable, 0)); //false
-// // console.log(deepEqual(0, null)); //false
-// console.log(deepEqual(null, null)); //true
-// // console.log(deepEqual(nunVariable, null)); //true
+console.log(deepEqual(obj1, obj3)); //false
+console.log(deepEqual(null, null)); //true
+console.log(deepEqual(nunVariable, 0)); //false
+console.log(deepEqual(0, null)); //false
+console.log(deepEqual(null, null)); //true
+console.log(deepEqual(nunVariable, null)); //true
 console.log(deepEqual(1, 2)); //false
 console.log(deepEqual(x, y)); //true
 console.log(deepEqual(obj1, obj2)); //true
-// console.log(deepEqual(obj1, { she: { is: "an" }, him: 2, we: { they: 4 } })); //true
+console.log(deepEqual(obj1, { she: { is: "an" }, him: 2, we: { they: 4 } })); //true
 console.log(deepEqual(obj1, obj3)); //false
 console.log(deepEqual(obj4, obj5)); //false
 console.log(deepEqual(arr1, arr2)); //false
