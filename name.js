@@ -65,15 +65,15 @@ function deepEqual(obj1, obj2) {
 
 function isObject(object) {
     //helper function of deepEqual. used for recursive call of deepEqual
-    //checks if a value of a key-value pair is an object. 
+    //checks if a value of a key-value pair is an object and object not null.  
     return object != null && typeof object === 'object';
 }
 
 
 
 let obj1 = { she: { is: "an" }, him: 2, we: { they: 4 } };
-let obj2 = obj1;
 let obj3 = { she: { is: "an" }, him: 2, we: { they: 3 } };
+let obj2 = obj1;
 let obj4 = { a: 1, b: 2, c: 3, d: 4 };
 let obj5 = { a: 1, b: 2, c: 3, d: 4, e: 5 };
 let obj6 = { she: { is: "an" }, him: 2, };
