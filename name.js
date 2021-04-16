@@ -29,6 +29,23 @@
 
 //Activity 3: Javascript Objects
 
+//This function was written with the help of this website: 
+// https://dmitripavlutin.com/how-to-compare-objects-in-javascript/.
+//I used the help of this website in the following way. 
+//My function implementation is original. On line #72 I gained clarity from Dimtri. 
+//What I learned from Dmitri--my program was using a recursive call to deepEqual
+//to step into the first nested object.  However, after my program stepped into
+//the first object that it encountered I compared the primitive types within the object.
+//My program did not continue to step into subsequent objects. 
+//By changing the placement of the recursive call to earlier in the program 
+//line 72:  if (stillObjects && !deepEqual(firstVals, secondVals)
+//then I was able to keep calling the deepEqual function until all objects
+//were extracted from the original parameters that were passed to deepEqual. 
+//The line immediately preceding the recursion, line 71:           
+//const stillObjects = isObject(firstVals) && isObject(secondVals) helps determine
+//whether or not a recursive call is executed on the next line, line 72.
+//My original recursive call was after the conditional on lines 72-73.  
+
 function deepEqual(obj1, obj2) {
     //this function compares JS object literals a& JS primitive types. 
     //if the parameters passed are primitive types a strict comparison checks for
@@ -52,15 +69,14 @@ function deepEqual(obj1, obj2) {
             const firstVals = obj1[key];
             const secondVals = obj2[key];
             const stillObjects = isObject(firstVals) && isObject(secondVals);
-            if (
-                stillObjects && !deepEqual(firstVals, secondVals) ||
+            if (stillObjects && !deepEqual(firstVals, secondVals) ||
                 !stillObjects && firstVals !== secondVals) {
                 return false;
             }
         }
         return true;
     }
-    return obj1 === obj2; //strict comparison 
+    return obj1 === obj2; //strict comparison for primitive types 
 }
 
 function isObject(object) {
@@ -69,10 +85,9 @@ function isObject(object) {
     return object != null && typeof object === 'object';
 }
 
-
-
 let obj1 = { she: { is: "an" }, him: 2, we: { they: 4 } };
 let obj3 = { she: { is: "an" }, him: 2, we: { they: 3 } };
+// console.log(deepEqual(obj1, obj3)); //false
 let obj2 = obj1;
 let obj4 = { a: 1, b: 2, c: 3, d: 4 };
 let obj5 = { a: 1, b: 2, c: 3, d: 4, e: 5 };
