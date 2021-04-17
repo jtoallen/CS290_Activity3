@@ -32,19 +32,20 @@
 //This function was written with the help of this website: 
 // https://dmitripavlutin.com/how-to-compare-objects-in-javascript/.
 //I used the help of this website in the following way. 
-//My function implementation is original. On line #72 I gained clarity from Dimtri. 
-//What I learned from Dmitri--my program was using a recursive call to deepEqual
+//My function implementation is original. On line 74 I gained clarity from Dimtri. 
+//What I learned from Dmitri--my program used a deepEqual recursive call
 //to step into the first nested object.  However, after my program stepped into
-//the first object that it encountered I compared the primitive types within the object.
-//My program did not continue to step into subsequent objects. 
+//the first object it encountered it compared the properties within the object.
+//My program did not recurse again when it found another nested object. 
+//line 74, first condition states : if you find an object, call deepEqual again. 
 //By changing the placement of the recursive call to earlier in the program 
-//line 72:  if (stillObjects && !deepEqual(firstVals, secondVals)
+//line 74:  if (stillObjects && !deepEqual(firstVals, secondVals)
 //then I was able to keep calling the deepEqual function until all objects
 //were extracted from the original parameters that were passed to deepEqual. 
-//The line immediately preceding the recursion, line 71:           
+//The line immediately preceding the recursion, line 73:           
 //const stillObjects = isObject(firstVals) && isObject(secondVals) helps determine
-//whether or not a recursive call is executed on the next line, line 72.
-//My original recursive call was after the conditional on lines 72-73.  
+//whether or not a recursive call is executed on the next line, line 73.
+//My original recursive call was after the conditional on line 74.
 
 function deepEqual(obj1, obj2) {
     //this function compares JS object literals a& JS primitive types. 
