@@ -56,7 +56,6 @@ function deepEqual(obj1, obj2) {
     //Then primitive types are strictly compared when object values are extracted.
 
     if (isObject(obj1) && isObject(obj2)) {
-        // if ((typeof (obj1) == "object" && obj1 !== null) && (typeof (obj2) == "object" && obj2 !== null)) {
         let firstKeys = Object.keys(obj1);
         let secondKeys = Object.keys(obj2);
         if (Object.keys(obj1).length !== Object.keys(obj2).length) {
